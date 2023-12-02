@@ -9,7 +9,9 @@ plugins:
   - jekyll-seo-tag
   - jemoji
 
+
 # Build settings
+baseurl: /adasite
 markdown: kramdown
 exclude: [ "README.md" ]
 sass:
