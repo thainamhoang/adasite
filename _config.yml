@@ -2,7 +2,7 @@
 title: ADAroundTheWorld
 tag_text: Biscuit
 description: Biscuit is a single-page responsive Jekyll theme. This is the most simple and still-good-looking Jekyll theme that you can find.
-# baseurl: "/blog" # the subpath of your site, e.g. /blog
+# baseurl: "/blog" # the sub-path of your site, e.g. /blog
 # url: "https://example.com" # the base hostname & protocol for your site, e.g. http://example.com
 
 plugins:
@@ -12,6 +12,7 @@ plugins:
 
 # Build settings
 baseurl: /adasite
+url: http://thainamhoang.github.io
 markdown: kramdown
 exclude: [ "README.md" ]
 sass:
