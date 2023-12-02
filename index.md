@@ -55,8 +55,6 @@ You might already have guessed… degree of the node is exactly what we need.
 
 {% include theory/degree.html %}
 
-{% include theory/jointplot.html %}
-
 This time, the color of the node reflects the value of the degree (lighter color 
 means higher degree). If you hover over the nodes, you can compare the betweenness 
 and degree measures for the node. Naturally, the ones in the big cluster have higher 
