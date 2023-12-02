@@ -55,6 +55,8 @@ You might already have guessed… degree of the node is exactly what we need.
 
 {% include theory/degree.html %}
 
+{% include theory/jointplot.html %}
+
 This time, the color of the node reflects the value of the degree (lighter color 
 means higher degree). If you hover over the nodes, you can compare the betweenness 
 and degree measures for the node. Naturally, the ones in the big cluster have higher 
@@ -68,7 +70,9 @@ and merged it with the
 [IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) as we needed to 
 quantify the success of the movie.
 
+{% include theory/year_histogram.html %}
 
+sdsd
 
 ## What about the movies?
 
