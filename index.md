@@ -9,8 +9,8 @@ layout: default
 *Thai-Nam Hoang, Valentin Peyron, Paul-Bogdan Jurcut, Quentin Esteban, Jan Kokla*
 
 In 2004, American entrepreneur Frans Johansson published the book
-*“The Medici Effect: Breakthrough Insights at the Intersection of
-Ideas, Concepts, and Cultures”* [[1](https://www.goodreads.com/pt/book/show/20482413)]. 
+[“The Medici Effect: Breakthrough Insights at the Intersection of
+Ideas, Concepts, and Cultures”](https://www.goodreads.com/pt/book/show/20482413). 
 In other words, by merging ideas from a range of diverse backgrounds,
 one can increase the likelihood of intellectual cross-pollination,
 which might lead to innovation and success. Our goal is to see if this 
@@ -37,10 +37,11 @@ really simple to grasp right, but how can we quantify it? This is where
 If you take all pairs of nodes from the graph and find the shortest paths 
 between them, then betweenness centrality for a certain node is _the percentage 
 of these shortest paths that go through the node_. If you now once again look 
-at the graph above and focus on the colors of the nodes (you 
-can hover over the nodes to see the numerical betweenness measure), you see 
+at the graph above and focus on the colors of the nodes [^1], you see 
 that the lighter the color, the bigger the betweenness. We have 
 successfully quantified “being at the intersection” for clustered network graphs.
+
+[^1]: You can hover over the nodes to see the numerical measure.
 
 ### Degree
 
@@ -58,6 +59,16 @@ This time, the color of the node reflects the value of the degree (lighter color
 means higher degree). If you hover over the nodes, you can compare the betweenness 
 and degree measures for the node. Naturally, the ones in the big cluster have higher 
 degree, compared to the ones in the outskirts.
+
+## Data
+
+Now that we have the theory settled, let's look at the data. We used 
+[CMU Movie Summary Corpus](https://www.cs.cmu.edu/~ark/personas/) 
+and merged it with the 
+[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) as we needed to 
+quantify the success of the movie.
+
+
 
 ## What about the movies?
 
