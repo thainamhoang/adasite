@@ -72,6 +72,8 @@ quantify the success of the movie.
 
 sdsd
 
+{% include theory/first_graph_test.html %}
+
 ## What about the movies?
 
 We have found ways for quantifying the centrality of the node, but how about movies? 
