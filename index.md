@@ -29,7 +29,9 @@ for quantifying it: **_degree_** and **_betweenness_**.
 
 If you take a look at the graph below, you see that we have 2 bigger 
 clusters and one node that sits at the intersection. 
-This is exactly what the Medici effect referred to! Visually it all looks 
+This is exactly what the Medici effect referred to! The yellow node in the middle 
+is a combination of the ideas from both clusters or controls the flow of information 
+and should be more successful. Visually it all looks 
 really simple to grasp right, but how can we quantify it? This is where 
 **betweenness** measure comes in.
 
@@ -46,7 +48,7 @@ successfully quantified “being at the intersection” for clustered network gr
 
 ### Degree
 
-What if we don’t have such clear clusters, but we rather have a big chunk of quite 
+What if we don’t have such clear clusters, but rather have a big chunk of quite 
 similar movies and then some outliers as seen from the graph below? We don’t really 
 have nodes that act as bridges between clusters and sit at the intersections. In 
 that case, let’s redefine the Medici effect in the movie industry a bit and say 
@@ -56,7 +58,9 @@ You might already have guessed… degree of the node is exactly what we need.
 
 {% include theory/degree.html %}
 
-This time, the color of the node reflects the value of the degree (lighter color 
+The degree of a node is the number of connections that it has to other nodes in the 
+network. This time, the color of the node reflects exactly that 
+(lighter color 
 means higher degree). If you hover over the nodes, you can compare the betweenness 
 and degree measures for the node. Naturally, the ones in the big cluster have higher 
 degree, compared to the ones in the outskirts.
@@ -71,7 +75,13 @@ quantify the success of the movie.
 
 {% include analysis/year_histogram.html %}
 
-TBD
+From the histogram above, we can see that there are quite a big amount of movies. 
+To cope with such quantities, we decided to run the analysis on decade basis. 
+In other words all the correlation analyses below are done for 10 years: 1920-1929, 
+1930-1939 etc. As visualising even 1000 nodes would be computationally heavy, all 
+the following visualisations of network graphs use year 2012 as an example (388 nodes).
+
+...
 
 ## What about the movies?
 
@@ -83,14 +93,14 @@ alternative approaches, which include **embeddings** and **classification**.
 
 The idea is simple: find the similarity between all possible combinations of movies 
 and if they're similar enough, create an edge. The reality is a bit more complex.
-We first need to turn movies into vector representations. In order to do that , 
+We first need to turn movies into vector representations. In order to do that, 
 we'll use an embedding model 
 [E5-large-v2](https://huggingface.co/intfloat/e5-large-v2) that takes the plot of 
-the movie as an input and converts it into normalized vector with embedding size 
-of 1024.
+the movie as an input and converts it into normalized feature vector with 
+embedding size of 1024.
 
-Once we have vectorized the plots, we can calculate the similarities between 
-the plots with dot product because they are normalized to unit vectors. Below 
+Once we have vectorized the plots and as they're normalized, we can calculate 
+the cosine similarities between the plots with dot product. Below 
 you can see an example of similarity matrix with 20 random movies. Notice that 
 one of the quirks of the embedding model is that all the cosine similarities are
 between 0.7 and 1.0. As we still have a distribution, it will not be a problem for
@@ -121,11 +131,7 @@ In order to come up with threshold, let's look at the histogram of the similarit
 {% include analysis/similarity_hist.html %}
 
 The values are normally distributed and in order to keep it simple, let's set the limit to 75% percentile. 
-This way we will have enough connected nodes, but not too much. It's important to note that generating the graph for all the movies during the 
-100 years would computationally really heavy. Thus, every decade is taken into the 
-analysis separately. The histogram below is an example of 2012.
-
-With the threshold, we have finally reached the goal... we have the graph. 
+This way we will have enough connected nodes, but not too much. We have finally reached the goal... we have the graph. 
 For better visibility, the one below only includes the movies from 2012. As you 
 can see, we have only one big cluster with some movies on the outskirts. Thus, we 
 used degree to color the nodes (<u>the lighter the color, the higher the degree</u>). 
@@ -144,11 +150,13 @@ neighbouring movies explicitly, when you click on one of the nodes.
 
 {% include analysis/2013_embedding_example.html %}
 
-When coming back to the initial question of "whether the movies at the 
-intersections are more successful", we should see that the lighter nodes 
-tend to be bigger. From the visual inspection it is really hard to tell if 
-there is any association. There are bigger nodes (higher rated -> more successful) 
-at the outskirts as well as in the middle of the cluster. To get a quantitative answer
+As we have only one big cluster, then the question to ask when coming back to 
+the the research problem is "whether the movies with higher degree are more successful", 
+Thus, we should see that the lighter nodes are bigger. From the visual inspection 
+it is really hard to tell if there is any association. There are bigger nodes 
+(higher rated → more successful) 
+at the outskirts as well as in the middle of the cluster. It might even be that 
+the bigger clusters tend to be at the outskirts. To get a quantitative answer
 to our research question, we will perform **correlation analysis** (see further
 below).
 
@@ -166,5 +174,31 @@ TBD
 TBD
 
 ## Correlation Analysis
+
+### Simple Correlation
+
+TBD
+
+#### Embedding Approach
+
+TBD
+
+####  Classification Approach
+
+TBD
+
+### Partial Correlations
+
+TBD
+
+#### Embedding Approach
+
+TBD
+
+####  Classification Approach
+
+TBD
+
+## Summary
 
 TBD
