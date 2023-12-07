@@ -1,8 +1,9 @@
 ---
 layout: default
 ---
-
-![Banner](assets/banner.jpg)
+<p>
+    <img src="assets/banner.jpg" alt="Banner" class="banner">
+</p>
 
 # Creative breakthroughs occur, when worlds collide
 
@@ -131,6 +132,15 @@ used degree to color the nodes (<u>the lighter the color, the higher the degree<
 The size of the node is dependent on the IMDB rating of the movie (<u>the bigger 
 the node, the higher the rating</u>). You can see the 
 neighbouring movies explicitly, when you click on one of the nodes.
+
+<div class="noteBoxes note" style="display:flex;">
+	<img src="assets/light_bulb.svg" class="lightbulb" style="margin-bottom:auto;">
+	 <div>
+		<p style="margin-bottom: 0">Hover over the nodes to see attributes and click on it to see its neighbours.</p>
+        <p style="margin-bottom: 0">Feel free to drag, zoom and filter based on IMDB rating.</p>
+	</div>
+</div>
+
 
 {% include analysis/2013_embedding_example.html %}
 

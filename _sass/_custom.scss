@@ -11,3 +11,33 @@
 .bk-Figure {
     margin-bottom: 1.5rem;
 }
+
+.noteBoxes
+{
+	border: 1px solid;
+  	border-radius: 5px;
+	padding: 10px;
+	width: calc(100% - 1rem);
+	display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.note {
+	border-color: #2A9D8F;
+	background-color: rgba(42, 157, 143, 0.1);
+}
+
+.lightbulb {
+	width: 20px;;
+	padding-right: 10px;
+}
+
+.banner {
+  margin: 0 auto;
+  display: block;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
