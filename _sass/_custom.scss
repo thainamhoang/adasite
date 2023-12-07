@@ -1,6 +1,11 @@
-.full-width .bk-Tabs {
+.full-width .bk-Column {
     width: 100vw;
     margin-left: calc(50% - 50vw);
+}
+
+.bk-Column::part(center-slider) {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bk-Figure {
