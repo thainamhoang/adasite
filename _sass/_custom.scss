@@ -1,6 +1,6 @@
 .full-width .bk-Column {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
+    width: calc(100vw - 10vw);
+    margin-left: calc(50% - 45vw);
 }
 
 .bk-Column::part(center-slider) {

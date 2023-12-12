@@ -151,7 +151,7 @@ neighbouring movies explicitly, when you click on one of the nodes.
 {% include analysis/2013_embedding_example.html %}
 
 As we have only one big cluster, then the question to ask when coming back to 
-the the research problem is "whether the movies with higher degree are more successful", 
+to the research problem is "whether the movies with higher degree are more successful", 
 Thus, we should see that the lighter nodes are bigger. From the visual inspection 
 it is really hard to tell if there is any association. There are bigger nodes 
 (higher rated → more successful) 
@@ -175,30 +175,44 @@ TBD
 
 ## Correlation Analysis
 
-### Simple Correlation
+Now that we have generated the graphs in two different ways, and analysed 
+the relationships between the centrality measures and success (IMDB rating) 
+visually, it is high time for quantifying the relationship. We will first 
+use simple correlation (a.k.a. Pearson correlation coefficient) and then go 
+more in depth and "control" for some variables.
 
-TBD
+### Is there a relationship?
 
-#### Embedding Approach
+To answer the question, let's look at the scatterplots with regression lines below. 
+The plots only quantify the association between the degree and the IMDB rating 
+of the nodes using the "embedding approach" for generating the graph. As you can see,
+the regression lines are only slightly tilted indicating that the correlation 
+between the degree and IMDB rating is very weak. What is interesting, however, is 
+that all decades, without any exception, have small **negative** correlation. In 
+other words, it means that <u>"being at the intersection" or trying to take ideas from 
+many other movies is counterproductive as it is associated with lower rating from 
+the viewers </u>.
 
-TBD
+{% include analysis/scatter_tabs.html %}
 
-####  Classification Approach
+How about the second approach with genres and themes? ...
 
-TBD
+(tabs with scatterplots for the second approach)
 
-### Partial Correlations
+{% include analysis/emb_corr_table.html %}
 
-TBD
 
-#### Embedding Approach
+### That's too easy!
 
-TBD
+Simple correlation might not give us too clear picture though as there are some 
+other variables that might influence the association. For example: 
 
-####  Classification Approach
+1. we know that **some movies have more ratings than others**;
+2. **country of origin** might influence the IMDB ratings;
+3. IMDB rating might also be depending on the **genres** of the movie.
 
-TBD
+Let's use partial correlation and "control" for such variables. 
 
 ## Summary
 
-TBD
+...
