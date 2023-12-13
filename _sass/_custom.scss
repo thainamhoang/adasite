@@ -30,6 +30,11 @@
 	background-color: rgba(42, 157, 143, 0.1);
 }
 
+.warning {
+    border-color: #E76F51;
+	background-color: rgba(231, 111, 81, 0.1);
+}
+
 .lightbulb {
 	width: 20px;;
 	padding-right: 10px;
@@ -40,4 +45,8 @@
   display: block;
   width: 100vw;
   margin-left: calc(50% - 50vw);
+}
+
+.genre-theme-table {
+
 }

@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bokeh Plot</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        display: flow-root;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.3.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.3.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.3.0.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+  </head>
+  <body>
+    <div id="fb2a5bb2-7fa8-46d3-8d51-5030922b1043" data-root-id="p1029" style="display: contents;"></div>
+  
+    <script type="application/json" id="p1036">
+      {"0298bc07-3e22-4ff9-a929-d730fa10d672":{"version":"3.3.0","title":"Bokeh Application","roots":[{"type":"object","name":"DataTable","id":"p1029","attributes":{"height":240,"source":{"type":"object","name":"ColumnDataSource","id":"p1020","attributes":{"selected":{"type":"object","name":"Selection","id":"p1021","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1022"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAA="},"shape":[8],"dtype":"int32","order":"little"}],["Genres",{"type":"ndarray","array":["Drama","Comedy","Action","Horror","Romance","Thriller","Adventure","Documentary"],"shape":[8],"dtype":"object","order":"little"}],["Themes",{"type":"ndarray","array":["Science-Fiction","Crime","Fantasy","War","Mystery","History","Western","Family"],"shape":[8],"dtype":"object","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1033","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1034"}}},"columns":[{"type":"object","name":"TableColumn","id":"p1023","attributes":{"field":"Genres","title":"Genres","formatter":{"type":"object","name":"StringFormatter","id":"p1024"},"editor":{"type":"object","name":"StringEditor","id":"p1025"}}},{"type":"object","name":"TableColumn","id":"p1026","attributes":{"field":"Themes","title":"Themes","formatter":{"type":"object","name":"StringFormatter","id":"p1027"},"editor":{"type":"object","name":"StringEditor","id":"p1028"}}}]}}]}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('p1036').textContent;
+              const render_items = [{"docid":"0298bc07-3e22-4ff9-a929-d730fa10d672","roots":{"p1029":"fb2a5bb2-7fa8-46d3-8d51-5030922b1043"},"root_ids":["p1029"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>

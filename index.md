@@ -160,16 +160,96 @@ the bigger clusters tend to be at the outskirts. To get a quantitative answer
 to our research question, we will perform **correlation analysis** (see further
 below).
 
-### Classification
+### Genres
 
 Before we get to correlations, let's see another approach for generating network 
-graphs.
+graphs. We first use the genres provided in the dataset and them apply a custom 
+approach for more robust results.
 
-#### Genres
+#### Raw Genres
 
-TBD
+As every movie has one or several genres associated with it, we can use it 
+to form a graph: <u>there will be an edge between the movies, if they have at least 
+one common genre</u>. Now it's getting interesting as we're using exactly the same movies to generate graphs, 
+but they look completely different. As movies had different amount of genres, using 
+degree for coloring nodes doesn't make sense, and we have used betweenness instead... 
+or logarithm of betweenness to be precise to get better variability of colors. As you 
+can see, there are some really distinct clusters where betweenness is 0, but again 
+no clear pattern of size-color dynamics that we're searching for.
 
-#### Graph Generation
+{% include analysis/raw_genre_graph.html %}
+
+#### Genres & Themes
+
+"Who came up with those genres?" you might ask, and you're right. Do you know what 
+is [gloat gland](https://en.wikipedia.org/wiki/Goat_gland_(filmmaking)) or why should 
+we have a genre named "The Netherlands in World War II"? 
+
+(word cloud of genres)
+
+Some genres, such as 
+"Black-and-white" or "Animation," do not directly relate to the plot but rather to the 
+style or technique of the movie. The presence of subgenres like "Romantic Drama" complicates 
+the genre landscape, as they often represent a mixture of primary genres, 
+<u>making it difficult to maintain clear distinctions</u>. Even among the most popular genres,
+we observe unnecessary entanglement. For instance, while "Comedy" and "Drama" are distinct 
+in the emotions they evoke, genres like "Science-Fiction" or "Crime" often overlap with 
+others such as "Drama" and "Comedy," serving more as settings or themes rather than standalone genres.
+
+(histograms of genres per movie and most popular genres)
+
+To enhance the accuracy of our movie classification, we've decided to differentiate between 
+'**genres**' and '**themes**'. This distinction allows us to capture both the emotional 
+tone and the narrative setting of each movie more effectively. This way we can get more nuanced 
+classification, recognizing that the emotional impact of a movie (genre) 
+and its narrative backdrop (theme) are distinct yet equally important aspects of its identity.
+
+{% include analysis/genre_theme_table.html %}
+
+Why all this fuss? Now we can use another fancy Large Language Model (LLM) to predict the probability
+of belonging to a certain genre and a certain theme. We let the model predict it genres and themes separately, 
+so we get two vectors with 8 elements that both sum up to 1. As an example, let's look at 
+[_Life of Pi_](https://www.imdb.com/title/tt0454876/) and see if the probabilities make sense to the naked eye. 
+First, only genres:
+
+~~~ json
+{
+    "Adventure": 0.3571245074272156, 
+    "Action": 0.12947343289852142, 
+    "Drama": 0.12647315859794617, 
+    "Documentary": 0.11648714542388916, 
+    "Horror": 0.09885319322347641, 
+    "Thriller": 0.06726425886154175, 
+    "Romance": 0.06251280009746552, 
+    "Comedy": 0.04181152954697609
+} 
+~~~
+
+_Life of Pi_ is far from comedy and rather adventurous with some action and drama... makes sense. 
+What about themes:
+
+~~~ json
+{
+    "Fantasy": 0.25475648045539856, 
+    "Science-Fiction": 0.16728335618972778, 
+    "History": 0.13641420006752014, 
+    "Family": 0.09733916819095612, 
+    "Western": 0.0917028859257698, 
+    "Mystery": 0.08793745934963226, 
+    "Crime": 0.0848972499370575, 
+    "War": 0.07966917008161545
+} 
+~~~
+
+If Life of Pi is something from these themes, then it will probably be fantasy, 
+so the model was once again successful.
+
+We can now concatenate the two vectors with probabilities, normalize it to unit vector 
+and then we have a feature vector or embedding once again for every movie. When the first 
+embedding approach gave us an embedding of size 1024 and all those numbers didn't tell us anything, 
+then this time we have interpretable values in the feature vector. As with previous approach we, 
+find all possible similarity combinations, set the threshold to 75th percentile and 
+create an edge every time similarity is higher than the threshold.
 
 TBD
 
@@ -214,37 +294,66 @@ other variables that might influence the association. For example:
 Let's use partial correlation and "control" for such variables. 
 
 
+## Summary
+
+...
+
+
 ## Ethical Risks
 
-Overall, our project does not seem to have many ethical risks. Indeed, as the project aims to determine if the best movies are at the "Intersection," the worst outcome could be inaccurate results. However, let's conduct a more in-depth analysis of our project from an ethical risk standpoint to identify potential risks and explore mitigation strategies. 
-PS: This analysis was conducted at the end of our work, so none of the proposed measures have been implemented yet.
+Overall, our project does not seem to have many ethical risks. 
+Indeed, as the project aims to determine if the best movies are at 
+the "Intersection," the worst outcome could be inaccurate results. 
+However, let's conduct a more in-depth analysis of our project from an 
+ethical risk standpoint to identify potential risks and explore mitigation 
+strategies.
+
+<div class="noteBoxes warning" style="display:flex;">
+	<img src="assets/warning.svg" class="lightbulb" style="margin-bottom:auto;">
+	 <div>
+		<p style="margin-bottom: 0">This analysis was conducted at the end of our work, 
+so none of the proposed measures have been implemented yet.</p>
+	</div>
+</div>
 
 #### Dataset 
-Firstly, let's examine the dataset. It was created by a team at Carnegie Mellon University and consists of 42,306 movie plot summaries extracted from Wikipedia, along with aligned metadata from Freebase. Therefore, the data were sourced from public domains. We supplemented this dataset with IMDb ratings and vote counts from a public database. Data gaps were not addressed in our study.
+
+Firstly, let's examine the dataset. It was created by a team at 
+Carnegie Mellon University and consists of 42,306 movie plot 
+summaries extracted from Wikipedia, along with aligned metadata 
+from Freebase. Therefore, the data were sourced from public domains. 
+We supplemented this dataset with IMDb ratings and vote counts 
+from a public database. Data gaps were not addressed in our study.
 
 #### Beneficence
-Our project offers valuable insights into cinematic trends and contributes to understanding the factors behind movie success. Specifically, it explores whether being at the "Intersection" is beneficial for a film.
+
+Our project offers valuable insights into cinematic trends and 
+contributes to understanding the factors behind movie success. 
+Specifically, it explores whether being at the "Intersection" 
+is beneficial for a film.
 
 #### Non-Maleficence
+
 1. Risks: Incorrect results from our study could potentially lead to misguided decisions in movie production, affecting ratings and possibly the financial success of the involved parties. However, since our analysis is based solely on ratings, financial implications are uncertain.
 2. Mitigation: To reduce these risks, we could cross-reference our data with another dataset to minimize misinformation. Performing multiple analyses with the same goal and comparing them could also be beneficial. We did this by using various metrics to define "being at the Intersection."
 
 #### Privacy
+
 1. Risks: As the data used are completely anonymous, there are no privacy concerns with our dataset.
 2. Mitigation: Since our dataset is derived from anonymous data, no additional privacy measures are required.
 
 #### Fairness
+
 1. Risks: From a human fairness perspective, our study did not use data related to actors or characters, thus eliminating human-related fairness risks. However, a minor fairness issue might arise from the genres of movies, as our analysis includes genre information, potentially leading to skewed results due to genre distribution imbalances.
 2. Mitigation: To mitigate this risk, it would be useful to ensure a balanced representation of genres. We could group genres for comparative analysis.
 
 #### Sustainability 
+
 1. Risks: Our project does not require excessive computational power, posing no significant sustainability issues. However, maintaining an up-to-date dataset requires regular updates, which, while minimal in energy consumption, could be time-consuming. An annual update should suffice, with minimal environmental impact.
 
 #### Empowerment
-Our analysis is not specifically targeted at any particular group of people. As the dataset is anonymous and the results aim to identify a correlation between quality and being at the Intersection, there are no apparent risks, and hence no need for specific mitigation measures.
 
-
-
-## Summary
-
-...
+Our analysis is not specifically targeted at any particular group of people. 
+As the dataset is anonymous and the results aim to identify a correlation 
+between quality and being at the Intersection, there are no apparent risks, 
+and hence no need for specific mitigation measures.
