@@ -199,6 +199,23 @@ TBD
 
 TBD
 
+## Ethical Risks
+
+#### Beneficience
+TBD
+#### Non-Maleficience
+
+#### Privacy
+TBD
+#### Fairness
+TBD
+#### Sustainability 
+TBD
+#### Empowerment
+
+
+
+
 ## Summary
 
 TBD
