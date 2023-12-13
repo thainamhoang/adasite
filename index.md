@@ -204,14 +204,24 @@ TBD
 #### Beneficience
 TBD
 #### Non-Maleficience
-
+1. Risks:
+2. Mitigation:
+TBD
 #### Privacy
+1. Risks:
+2. Mitigation:
 TBD
 #### Fairness
+1. Risks:
+2. Mitigation:
 TBD
 #### Sustainability 
+1. Risks:
+2. Mitigation:
 TBD
 #### Empowerment
+1. Risks:
+2. Mitigation:
 
 
 
