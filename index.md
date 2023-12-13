@@ -230,6 +230,7 @@ Our project offers valuable insights into cinematic trends and contributes to un
 Our analysis is not specifically targeted at any particular group of people. As the dataset is anonymous and the results aim to identify a correlation between quality and being at the Intersection, there are no apparent risks, and hence no need for specific mitigation measures.
 
 
+
 ## Summary
 
 TBD
