@@ -199,31 +199,35 @@ TBD
 
 TBD
 
+
 ## Ethical Risks
 
-#### Beneficience
-TBD
-#### Non-Maleficience
-1. Risks:
-2. Mitigation:
-TBD
+Overall, our project does not seem to have many ethical risks. Indeed, as the project aims to determine if the best movies are at the "Intersection," the worst outcome could be inaccurate results. However, let's conduct a more in-depth analysis of our project from an ethical risk standpoint to identify potential risks and explore mitigation strategies. 
+PS: This analysis was conducted at the end of our work, so none of the proposed measures have been implemented yet.
+
+#### Dataset 
+Firstly, let's examine the dataset. It was created by a team at Carnegie Mellon University and consists of 42,306 movie plot summaries extracted from Wikipedia, along with aligned metadata from Freebase. Therefore, the data were sourced from public domains. We supplemented this dataset with IMDb ratings and vote counts from a public database. Data gaps were not addressed in our study.
+
+#### Beneficence
+Our project offers valuable insights into cinematic trends and contributes to understanding the factors behind movie success. Specifically, it explores whether being at the "Intersection" is beneficial for a film.
+
+#### Non-Maleficence
+1. Risks: Incorrect results from our study could potentially lead to misguided decisions in movie production, affecting ratings and possibly the financial success of the involved parties. However, since our analysis is based solely on ratings, financial implications are uncertain.
+2. Mitigation: To reduce these risks, we could cross-reference our data with another dataset to minimize misinformation. Performing multiple analyses with the same goal and comparing them could also be beneficial. We did this by using various metrics to define "being at the Intersection."
+
 #### Privacy
-1. Risks:
-2. Mitigation:
-TBD
+1. Risks: As the data used are completely anonymous, there are no privacy concerns with our dataset.
+2. Mitigation: Since our dataset is derived from anonymous data, no additional privacy measures are required.
+
 #### Fairness
-1. Risks:
-2. Mitigation:
-TBD
+1. Risks: From a human fairness perspective, our study did not use data related to actors or characters, thus eliminating human-related fairness risks. However, a minor fairness issue might arise from the genres of movies, as our analysis includes genre information, potentially leading to skewed results due to genre distribution imbalances.
+2. Mitigation: To mitigate this risk, it would be useful to ensure a balanced representation of genres. We could group genres for comparative analysis.
+
 #### Sustainability 
-1. Risks:
-2. Mitigation:
-TBD
+1. Risks: Our project does not require excessive computational power, posing no significant sustainability issues. However, maintaining an up-to-date dataset requires regular updates, which, while minimal in energy consumption, could be time-consuming. An annual update should suffice, with minimal environmental impact.
+
 #### Empowerment
-1. Risks:
-2. Mitigation:
-
-
+Our analysis is not specifically targeted at any particular group of people. As the dataset is anonymous and the results aim to identify a correlation between quality and being at the Intersection, there are no apparent risks, and hence no need for specific mitigation measures.
 
 
 ## Summary
