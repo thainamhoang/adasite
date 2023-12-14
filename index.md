@@ -87,7 +87,7 @@ the following visualisations of network graphs use year 2012 as an example (388 
 
 We have found ways for quantifying the centrality of the node, but how about movies? 
 How can we generate a graph based on the data at hand? For that we came up with two 
-alternative approaches, which include **embeddings** and **classification**.
+alternative approaches, which include **embeddings** and **genres**.
 
 ### Embeddings
 
@@ -207,7 +207,7 @@ and its narrative backdrop (theme) are distinct yet equally important aspects of
 {% include analysis/genre_theme_table.html %}
 
 Why all this fuss? Now we can use another fancy Large Language Model (LLM) to predict the probability
-of belonging to a certain genre and a certain theme. We let the model predict it genres and themes separately, 
+of belonging to a certain genre and a certain theme. We let the model predict genres and themes separately, 
 so we get two vectors with 8 elements that both sum up to 1. As an example, let's look at 
 [_Life of Pi_](https://www.imdb.com/title/tt0454876/) and see if the probabilities make sense to the naked eye. 
 First, only genres:
@@ -251,14 +251,22 @@ then this time we have interpretable values in the feature vector. As with previ
 find all possible similarity combinations, set the threshold to 75th percentile and 
 create an edge every time similarity is higher than the threshold.
 
-TBD
+{% include analysis/genre_theme_graph.html %}
+
+Once again we have a different graph from the same movies. As with previous graph, 
+the color of the node is logarithm of betweenness (lighter color → higher measure) and size illustrates 
+the IMDB rating. While in previous graphs, the betweenness was either really high or 0, then this 
+time we have better spread due to the methodology we applied. Visually, however it is again impossible 
+to say if there is any relationship between the size and color of the node. It's high time for 
+correlation analysis.
 
 ## Correlation Analysis
 
-Now that we have generated the graphs in two different ways, and analysed 
+To recap, we have generated the graphs in three different ways, and analysed 
 the relationships between the centrality measures and success (IMDB rating) 
-visually, it is high time for quantifying the relationship. We will first 
-use simple correlation (a.k.a. Pearson correlation coefficient) and then go 
+visually, which didn't tell us anything conclusive. Hopefully, correlation analysis 
+will shed some light. We will first use simple correlation (a.k.a. Pearson correlation 
+coefficient) and then go 
 more in depth and "control" for some variables.
 
 ### Is there a relationship?
@@ -275,9 +283,15 @@ the viewers </u>.
 
 {% include analysis/scatter_tabs.html %}
 
-How about the second approach with genres and themes? ...
+The second approach with raw genres ...
 
 (tabs with scatterplots for the second approach)
+
+The third approach with custom genres ...
+
+(tabs with scatterplots for the third approach)
+
+To sum up, let's look at the table below:
 
 {% include analysis/emb_corr_table.html %}
 
@@ -292,6 +306,8 @@ other variables that might influence the association. For example:
 3. IMDB rating might also be depending on the **genres** of the movie.
 
 Let's use partial correlation and "control" for such variables. 
+
+(similar table as above, but with controlled results)
 
 
 ## Summary
