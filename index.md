@@ -79,9 +79,14 @@ From the histogram above, we can see that there are quite a big amount of movies
 To cope with such quantities, we decided to run the analysis on decade basis. 
 In other words all the correlation analyses below are done for 10 years: 1920-1929, 
 1930-1939 etc. As visualising even 1000 nodes would be computationally heavy, all 
-the following visualisations of network graphs use year 2012 as an example (388 nodes).
+the following graphs use year 2012 as an example (388 nodes).
 
-...
+{% include analysis/hex.html %}
+
+IMDB ratings are nicely distributed and mostly between 4 and 8. This is good to 
+keep in mind when performing correlation analysis - one of the arguments is 
+almost normally distributed and if it so for the other one, we can use parametric 
+methods.
 
 ## What about the movies?
 
@@ -185,7 +190,9 @@ no clear pattern of size-color dynamics that we're searching for.
 is [gloat gland](https://en.wikipedia.org/wiki/Goat_gland_(filmmaking)) or why should 
 we have a genre named "The Netherlands in World War II"? 
 
-(word cloud of genres)
+<p>
+    <img src="assets/word_cloud.jpg" style="width: 100%">
+</p>
 
 Some genres, such as 
 "Black-and-white" or "Animation," do not directly relate to the plot but rather to the 
@@ -206,7 +213,8 @@ and its narrative backdrop (theme) are distinct yet equally important aspects of
 
 {% include analysis/genre_theme_table.html %}
 
-Why all this fuss? Now we can use another fancy Large Language Model (LLM) to predict the probability
+Why all this fuss? Now we can use another fancy 
+[Large Language Model (LLM)](https://huggingface.co/facebook/bart-large-mnli) to predict the probability
 of belonging to a certain genre and a certain theme. We let the model predict genres and themes separately, 
 so we get two vectors with 8 elements that both sum up to 1. As an example, let's look at 
 [_Life of Pi_](https://www.imdb.com/title/tt0454876/) and see if the probabilities make sense to the naked eye. 
@@ -317,11 +325,11 @@ Let's use partial correlation and "control" for such variables.
 
 ## Ethical Risks
 
-Overall, our project does not seem to have many ethical risks. 
-Indeed, as the project aims to determine if the best movies are at 
-the "Intersection," the worst outcome could be inaccurate results. 
-However, let's conduct a more in-depth analysis of our project from an 
-ethical risk standpoint to identify potential risks and explore mitigation 
+We used [Digital Ethics Canvas](https://www.epfl.ch/education/educational-initiatives/cede/training-and-support/digital-ethics/a-visual-tool-for-assessing-ethical-risks/the-digital-ethics-canvas-how-to/)
+to assess the risks related to the project. It aims to determine if the best movies are at 
+the "intersection of different genres" and the worst outcome could stem from bad methodology 
+and inaccurate results. However, let's conduct a more in-depth analysis of our project from an 
+ethical standpoint to identify potential risks and explore mitigation 
 strategies.
 
 <div class="noteBoxes warning" style="display:flex;">
@@ -343,33 +351,44 @@ from a public database. Data gaps were not addressed in our study.
 
 #### Beneficence
 
-Our project offers valuable insights into cinematic trends and 
-contributes to understanding the factors behind movie success. 
-Specifically, it explores whether being at the "Intersection" 
-is beneficial for a film.
+Our project offers insights into cinematic trends and 
+contributes to understanding the factors behind the success of a movie. 
+Specifically, it explores whether using motives from several 
+genres could be beneficial for a movie.
 
 #### Non-Maleficence
 
-1. Risks: Incorrect results from our study could potentially lead to misguided decisions in movie production, affecting ratings and possibly the financial success of the involved parties. However, since our analysis is based solely on ratings, financial implications are uncertain.
-2. Mitigation: To reduce these risks, we could cross-reference our data with another dataset to minimize misinformation. Performing multiple analyses with the same goal and comparing them could also be beneficial. We did this by using various metrics to define "being at the Intersection."
+Incorrect results from our study could potentially lead to misguided decisions 
+in movie production, affecting ratings and possibly the financial success of the involved parties. 
+However, since our analysis is based solely on ratings, financial implications are uncertain.
+
+To reduce these risks, we could cross-reference our data with another dataset to increase 
+the robustness of our results. Performing multiple analyses with the same goal and 
+comparing them could also be beneficial, which we did by using various metrics to define "being at the intersection".
 
 #### Privacy
 
-1. Risks: As the data used are completely anonymous, there are no privacy concerns with our dataset.
-2. Mitigation: Since our dataset is derived from anonymous data, no additional privacy measures are required.
+As the data used is completely anonymous, there are no privacy concerns with our dataset.
 
 #### Fairness
 
-1. Risks: From a human fairness perspective, our study did not use data related to actors or characters, thus eliminating human-related fairness risks. However, a minor fairness issue might arise from the genres of movies, as our analysis includes genre information, potentially leading to skewed results due to genre distribution imbalances.
-2. Mitigation: To mitigate this risk, it would be useful to ensure a balanced representation of genres. We could group genres for comparative analysis.
+From a human fairness perspective, our study did not use data related to actors or characters, 
+thus eliminating human-related fairness risks. However, a minor fairness issue might arise from 
+the genres of movies, as our analysis includes genre information, potentially leading to skewed 
+results due to genre distribution imbalances.
+
+To mitigate the risk, it would be useful to ensure a balanced representation of genres. 
+This has been done by "controlling" genres in the correlation analysis.
 
 #### Sustainability 
 
-1. Risks: Our project does not require excessive computational power, posing no significant sustainability issues. However, maintaining an up-to-date dataset requires regular updates, which, while minimal in energy consumption, could be time-consuming. An annual update should suffice, with minimal environmental impact.
+Our project requires quite a big computational load, which spends significant amount of 
+energy. It is up to discussion if the results provided by this analysis outweigh the 
+energy consumption. We can make sure that the servers provided for us run on sustainable energy.
 
 #### Empowerment
 
-Our analysis is not specifically targeted at any particular group of people. 
-As the dataset is anonymous and the results aim to identify a correlation 
-between quality and being at the Intersection, there are no apparent risks, 
-and hence no need for specific mitigation measures.
+Our analysis concluded that there is no relation between taking ideas from different genres 
+and the success of a movie. We could say that it is good news for pure genre movies 
+that aim to uphold their art. If anything it is empowering to smaller genres with 
+smaller budgets and audiences.
