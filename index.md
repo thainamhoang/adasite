@@ -9,6 +9,14 @@ layout: default
 
 *Thai-Nam Hoang, Valentin Peyron, Paul-Bogdan Jurcut, Quentin Esteban, Jan Kokla*
 
+<div class="noteBoxes note" style="display:flex;">
+	<img src="assets/light_bulb.svg" class="lightbulb" style="margin-bottom:auto;">
+	 <div>
+		<p style="margin-bottom: 0">Below, you'll find some graphs that take almost the full window width.</p>
+        <p style="margin-bottom: 0">If you have problem scrolling, move your mouse to the side of the screen.</p>
+	</div>
+</div>
+
 In 2004, American entrepreneur Frans Johansson published the book
 [“The Medici Effect: Breakthrough Insights at the Intersection of
 Ideas, Concepts, and Cultures”](https://www.goodreads.com/pt/book/show/20482413). 
@@ -135,14 +143,12 @@ In order to come up with threshold, let's look at the histogram of the similarit
 
 {% include analysis/similarity_hist.html %}
 
-The values are normally distributed and in order to keep it simple, let's set the limit to 75% percentile. 
-This way we will have enough connected nodes, but not too much. We have finally reached the goal... we have the graph. 
+The values are normally distributed and in order to keep it simple, let's set the limit for creating 
+as edge to 75% percentile. We have finally reached the goal... we have the graph. 
 For better visibility, the one below only includes the movies from 2012. As you 
-can see, we have only one big cluster with some movies on the outskirts. Thus, we 
-used degree to color the nodes (<u>the lighter the color, the higher the degree</u>). 
-The size of the node is dependent on the IMDB rating of the movie (<u>the bigger 
-the node, the higher the rating</u>). You can see the 
-neighbouring movies explicitly, when you click on one of the nodes.
+can see, we have only one big cluster with some movies on the outskirts. For the first graph, 
+we use really simple approach, where the size of the node is constant and the color 
+depicts the rating (**lighter color → higher rating**).
 
 <div class="noteBoxes note" style="display:flex;">
 	<img src="assets/light_bulb.svg" class="lightbulb" style="margin-bottom:auto;">
@@ -153,15 +159,15 @@ neighbouring movies explicitly, when you click on one of the nodes.
 </div>
 
 
-{% include analysis/2013_embedding_example.html %}
+{% include analysis/embedding_graph_simpler.html %}
 
 As we have only one big cluster, then the question to ask when coming back to 
-to the research problem is "whether the movies with higher degree are more successful", 
-Thus, we should see that the lighter nodes are bigger. From the visual inspection 
-it is really hard to tell if there is any association. There are bigger nodes 
-(higher rated → more successful) 
-at the outskirts as well as in the middle of the cluster. It might even be that 
-the bigger clusters tend to be at the outskirts. To get a quantitative answer
+to the research problem is "whether the movies with higher degree are more successful". 
+In other words, we should see that the lighter nodes tend to be at the centre of the graph. 
+From the visual inspection it is really hard to tell if that's the case.
+If anything, it might be that the movies with the worst ratings (dark purple) are more 
+central, which would turn the logic of the theory upside down - better connectivity means 
+lower rating. To get a quantitative answer
 to our research question, we will perform **correlation analysis** (see further
 below).
 
@@ -174,11 +180,12 @@ approach for more robust results.
 #### Raw Genres
 
 As every movie has one or several genres associated with it, we can use it 
-to form a graph: <u>there will be an edge between the movies, if they have at least 
-one common genre</u>. Now it's getting interesting as we're using exactly the same movies to generate graphs, 
-but they look completely different. As movies had different amount of genres, using 
-degree for coloring nodes doesn't make sense, and we have used betweenness instead... 
-or logarithm of betweenness to be precise to get better variability of colors. As you 
+to form a graph: **there will be an edge between the movies, if they have at least 
+one common genre**. Now it's getting interesting as we're using exactly the same movies to generate graphs, 
+but they look completely different. When in the first case, the color represented 
+the rating, then this time we have used betweenness instead... 
+or logarithm of betweenness to be precise to get better variability of colors. 
+The size of the node now depends on the rating. As you 
 can see, there are some really distinct clusters where betweenness is 0, but again 
 no clear pattern of size-color dynamics that we're searching for.
 
@@ -263,7 +270,7 @@ create an edge every time similarity is higher than the threshold.
 
 Once again we have a different graph from the same movies. As with previous graph, 
 the color of the node is logarithm of betweenness (lighter color → higher measure) and size illustrates 
-the IMDB rating. While in previous graphs, the betweenness was either really high or 0, then this 
+the IMDB rating. While in previous graphs, the betweenness was either really high or almost zero, then this 
 time we have better spread due to the methodology we applied. Visually, however it is again impossible 
 to say if there is any relationship between the size and color of the node. It's high time for 
 correlation analysis.
