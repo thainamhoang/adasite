@@ -210,7 +210,7 @@ we observe unnecessary entanglement. For instance, while "Comedy" and "Drama" ar
 in the emotions they evoke, genres like "Science-Fiction" or "Crime" often overlap with 
 others such as "Drama" and "Comedy," serving more as settings or themes rather than standalone genres.
 
-(histograms of genres per movie and most popular genres)
+{% include analysis/bar_charts.html %}
 
 To enhance the accuracy of our movie classification, we've decided to differentiate between 
 '**genres**' and '**themes**'. This distinction allows us to capture both the emotional 
