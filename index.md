@@ -77,9 +77,7 @@ degree, compared to the ones in the outskirts.
 
 Now that we have the theory settled, let's look at the data. We used 
 [CMU Movie Summary Corpus](https://www.cs.cmu.edu/~ark/personas/) 
-and merged it with the 
-[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) as we needed to 
-quantify the success of the movie.
+that contains the release year, name and plot descriptions.
 
 {% include analysis/year_histogram.html %}
 
@@ -89,9 +87,13 @@ In other words all the correlation analyses below are done for 10 years: 1920-19
 1930-1939 etc. As visualising even 1000 nodes would be computationally heavy, all 
 the following graphs use year 2012 as an example (388 nodes).
 
+We have already talked a lot about the "success". In the context of the movies 
+we decided to use IMDB rating as the reflection of "success". We used freely accessible 
+[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) and merged it with the existing data.
+
 {% include analysis/hex.html %}
 
-IMDB ratings are nicely distributed and mostly between 4 and 8. This is good to 
+Ratings are nicely distributed and mostly between 4 and 8. This is good to 
 keep in mind when performing correlation analysis - one of the arguments is 
 almost normally distributed and if it so for the other one, we can use parametric 
 methods.
@@ -99,7 +101,9 @@ methods.
 ## What about the movies?
 
 We have found ways for quantifying the centrality of the node, but how about movies? 
-How can we generate a graph based on the data at hand? For that we came up with two 
+There must be a way of representing our big corpus of data as graphs so that we could 
+calculate the metrics we discussed above and measure their correlation with IMDB ratings. 
+For that we came up with two 
 alternative approaches, which include **embeddings** and **genres**.
 
 ### Embeddings
@@ -324,10 +328,36 @@ Let's use partial correlation and "control" for such variables.
 
 (similar table as above, but with controlled results)
 
+What happened when we removed the effect of the amount of ratings, country of origin 
+and genres? Let's go column by column. When the embedding approach show weak 
+negative but statistically significant correlation before, then with partial 
+correlation the effect diminished and doesn't even reach statistical significance. 
+The story is more-or-less the same with the approach of raw genres. We can say that 
+this approach doesn't show any association between success and "being at the intersection". 
+Interestingly, the effect of the approach where we used custom genres and measured partial correlation 
+between degree and ratings didn't diminish after controlling for confounders. The weak statistically 
+significant positive correlation is still in place. The relation between log betweenness and rating, 
+however, changed with partial correlation and now there is no clear pattern.
+
 
 ## Summary
 
-...
+Our story started with the "Medici effect", the idea that different 
+perspectives could increase the originality and lead to better outcome. 
+We applied the idea to the movie industry and hypothesised that movies with 
+different genres/ideas/motives would be more successful. To validate it, we converted 
+the raw data of the movies into graphs using different approaches for more robustness. 
+Based on graphs we could calculate the measure of "being at the intersection", which 
+we represented with betweenness and degree centrality. Finally, we calculated 
+correlation and controlled for some variables for further robustness.
+
+What can we conclude? Three different approaches told us contradicting stories, but after 
+controlling for confounders, we can conclude that there isn't any evidence that 
+merging ideas from different genres/domains could help with the popularity or success of 
+a movie. What is more, we saw that the results highly depend on the approach we used for modelling 
+the data, which is to be expected as we went from plot descriptions into graph representations. 
+Using only one approach might give us clearer picture, but would tell only one 
+side of the story.
 
 
 ## Ethical Risks
