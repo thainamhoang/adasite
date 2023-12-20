@@ -25,9 +25,20 @@ one can increase the likelihood of intellectual cross-pollination,
 which might lead to innovation and success. Our goal is to see if this 
 holds true in the movie industry.
 
+## How?
+
+To do that we use the data about the movies, mainly their genres and plots. 
+Using different approaches we generate graphs that help us to quantify 
+"being at the intersection", which will later be used in correlation analysis. 
+This is the high-level idea, let's now go to details.
+
+<p>
+    <img src="assets/process.jpg" style="width: 100%">
+</p>
+
 ## "At the intersection"?
 
-Before we can dive deep into the movies, let’s first think about the 
+Before we can dive deep into the movies, we need to first think about the 
 concept of “being at the intersection” for a second. Most natural way 
 of looking at it is network graphs. With 2 simple examples, we will 
 introduce the two measures that we’re going to use 
@@ -39,7 +50,7 @@ If you take a look at the graph below, you see that we have 2 bigger
 clusters and one node that sits at the intersection. 
 This is exactly what the Medici effect referred to! The yellow node in the middle 
 is a combination of the ideas from both clusters or controls the flow of information 
-and should be more successful. Visually it all looks 
+and according to the theory should be more successful. Visually it all looks 
 really simple to grasp right, but how can we quantify it? This is where 
 **betweenness** measure comes in.
 
@@ -48,11 +59,9 @@ really simple to grasp right, but how can we quantify it? This is where
 If you take all pairs of nodes from the graph and find the shortest paths 
 between them, then betweenness centrality for a certain node is _the percentage 
 of these shortest paths that go through the node_. If you now once again look 
-at the graph above and focus on the colors of the nodes [^1], you see 
-that the lighter the color, the bigger the betweenness. We have 
+at the graph above and focus on the colors of the nodes, you see 
+that the lighter the color, the bigger the betweenness (hover over the nodes). We have 
 successfully quantified “being at the intersection” for clustered network graphs.
-
-[^1]: You can hover over the nodes to see the numerical measure.
 
 ### Degree
 
@@ -60,8 +69,8 @@ What if we don’t have such clear clusters, but rather have a big chunk of quit
 similar movies and then some outliers as seen from the graph below? We don’t really 
 have nodes that act as bridges between clusters and sit at the intersections. In 
 that case, let’s redefine the Medici effect in the movie industry a bit and say 
-that the most successful movies will be <u>the ones that have taken ideas from many 
-other movies and thus are connected to the biggest possible number of other nodes</u>. 
+that the most successful movies will be **the ones that have taken ideas from many 
+other movies and thus are connected to the biggest possible number of other nodes**. 
 You might already have guessed… degree of the node is exactly what we need.
 
 {% include theory/degree.html %}
@@ -77,33 +86,31 @@ degree, compared to the ones in the outskirts.
 
 Now that we have the theory settled, let's look at the data. We used 
 [CMU Movie Summary Corpus](https://www.cs.cmu.edu/~ark/personas/) 
-that contains the release year, name and plot descriptions.
-
-{% include analysis/year_histogram.html %}
-
-From the histogram above, we can see that there are quite a big amount of movies. 
+that contains the release year, name and plot descriptions. 
+From the histogram below, we can see that there are quite a big amount of movies. 
 To cope with such quantities, we decided to run the analysis on decade basis. 
 In other words all the correlation analyses below are done for 10 years: 1920-1929, 
 1930-1939 etc. As visualising even 1000 nodes would be computationally heavy, all 
 the following graphs use year 2012 as an example (388 nodes).
 
-We have already talked a lot about the "success". In the context of the movies 
-we decided to use IMDB rating as the reflection of "success". We used freely accessible 
-[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) and merged it with the existing data.
+{% include analysis/year_histogram.html %}
+
+We have already talked a lot about the "success" of a movie. In this analysis we decided to 
+use IMDB rating as the proxy. We used freely accessible 
+[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) and merged it with the existing data. Below you see that 
+ratings are nicely distributed and mostly between 4 and 8. This is good to 
+keep in mind when performing correlation analysis - one of the arguments is 
+almost normally distributed and if it so for the other variable, we can use parametric 
+methods.
 
 {% include analysis/hex.html %}
-
-Ratings are nicely distributed and mostly between 4 and 8. This is good to 
-keep in mind when performing correlation analysis - one of the arguments is 
-almost normally distributed and if it so for the other one, we can use parametric 
-methods.
 
 ## What about the movies?
 
 We have found ways for quantifying the centrality of the node, but how about movies? 
 There must be a way of representing our big corpus of data as graphs so that we could 
 calculate the metrics we discussed above and measure their correlation with IMDB ratings. 
-For that we came up with two 
+For that we came up with three 
 alternative approaches, which include **embeddings** and **genres**.
 
 ### Embeddings
@@ -141,7 +148,7 @@ job.
 
 Once we have the similarity matrix, we need to figure out the **threshold** for the 
 similarities. We want to create an edge between all the movies for which the 
-similarity is higher than the threshold. [_How to Start a Revolution_](https://www.imdb.com/title/tt1956516/)
+similarity is higher than the number we pick. [_How to Start a Revolution_](https://www.imdb.com/title/tt1956516/)
 from the similarity matrix, for example, will not have too many connected movies. 
 In order to come up with threshold, let's look at the histogram of the similarities below.
 
@@ -171,9 +178,7 @@ In other words, we should see that the lighter nodes tend to be at the centre of
 From the visual inspection it is really hard to tell if that's the case.
 If anything, it might be that the movies with the worst ratings (dark purple) are more 
 central, which would turn the logic of the theory upside down - better connectivity means 
-lower rating. To get a quantitative answer
-to our research question, we will perform **correlation analysis** (see further
-below).
+lower rating.
 
 ### Genres
 
@@ -217,10 +222,9 @@ others such as "Drama" and "Comedy," serving more as settings or themes rather t
 {% include analysis/bar_charts.html %}
 
 To enhance the accuracy of our movie classification, we've decided to differentiate between 
-'**genres**' and '**themes**'. This distinction allows us to capture both the emotional 
+"**genres**" and "**themes**". This distinction allows us to capture both the emotional 
 tone and the narrative setting of each movie more effectively. This way we can get more nuanced 
-classification, recognizing that the emotional impact of a movie (genre) 
-and its narrative backdrop (theme) are distinct yet equally important aspects of its identity.
+classification.
 
 {% include analysis/genre_theme_table.html %}
 
@@ -264,10 +268,10 @@ If Life of Pi is something from these themes, then it will probably be fantasy,
 so the model was once again successful.
 
 We can now concatenate the two vectors with probabilities, normalize it to unit vector 
-and then we have a feature vector or embedding once again for every movie. When the first 
+and then we have a feature vector once again for every movie. When the first 
 embedding approach gave us an embedding of size 1024 and all those numbers didn't tell us anything, 
-then this time we have interpretable values in the feature vector. As with previous approach we, 
-find all possible similarity combinations, set the threshold to 75th percentile and 
+then this time we have interpretable values in the feature vector. As with previous approach we find all possible
+similarity combinations, set the threshold to 75th percentile and 
 create an edge every time similarity is higher than the threshold.
 
 {% include analysis/genre_theme_graph.html %}
@@ -284,36 +288,42 @@ correlation analysis.
 To recap, we have generated the graphs in three different ways, and analysed 
 the relationships between the centrality measures and success (IMDB rating) 
 visually, which didn't tell us anything conclusive. Hopefully, correlation analysis 
-will shed some light. We will first use simple correlation (a.k.a. Pearson correlation 
-coefficient) and then go 
-more in depth and "control" for some variables.
+will shed some more light. Although we have three graphs, we used two different measures to 
+quantify the effect of "being at the intersection" and can therefore have more combinations. 
+Due to the limitations of some of the approaches we confine with the following relationships:
 
-### Is there a relationship?
+1. **embedding approach**: rating vs degree
+2. **raw genre approach**: rating vs betweenness
+3. **genre & theme approach**: rating vs degree
+4. **genre & theme approach**: rating vs betweenness
 
-To answer the question, let's look at the scatterplots with regression lines below. 
+The most popular correlation measure, **Pearson's correlation coefficient**, is really sensitive to 
+outliers, which is why we plotted the distributions of the variables below. Betweenness measures 
+clearly follow the power law and are not suitable for using Pearson's correlation. The same applies to 
+degree of "genres & themes" that has long tail. Thus, we will use **Spearman's rank correlation** for these 
+three, as it is invariant to the outliers.
+
+{% include analysis/distributions.html %}
+
+### So, is there a relationship?
+
+To answer the question, let's look at it once again visually using scatterplots with regression lines. 
 The plots only quantify the association between the degree and the IMDB rating 
 of the nodes using the "embedding approach" for generating the graph. As you can see,
 the regression lines are only slightly tilted indicating that the correlation 
 between the degree and IMDB rating is very weak. What is interesting, however, is 
 that all decades, without any exception, have small **negative** correlation. In 
-other words, it means that <u>"being at the intersection" or trying to take ideas from 
+other words, it might mean that <u>"being at the intersection" or trying to take ideas from 
 many other movies is counterproductive as it is associated with lower rating from 
 the viewers </u>.
 
 {% include analysis/scatter_tabs.html %}
 
-The second approach with raw genres ...
+How about other approaches? The table below summarises the results with corresponding p-values 
+in brackets. All the other approaches, however, show the very weak **positive** correlation. 
+The coefficients are so small that it might be due to chance and the way we generated the graph.
 
-(tabs with scatterplots for the second approach)
-
-The third approach with custom genres ...
-
-(tabs with scatterplots for the third approach)
-
-To sum up, let's look at the table below:
-
-{% include analysis/emb_corr_table.html %}
-
+{% include analysis/corr_table.html %}
 
 ### That's too easy!
 
@@ -326,18 +336,15 @@ other variables that might influence the association. For example:
 
 Let's use partial correlation and "control" for such variables. 
 
-(similar table as above, but with controlled results)
+{% include analysis/partial_corr_table.html %}
 
-What happened when we removed the effect of the amount of ratings, country of origin 
-and genres? Let's go column by column. When the embedding approach show weak 
-negative but statistically significant correlation before, then with partial 
-correlation the effect diminished and doesn't even reach statistical significance. 
-The story is more-or-less the same with the approach of raw genres. We can say that 
-this approach doesn't show any association between success and "being at the intersection". 
-Interestingly, the effect of the approach where we used custom genres and measured partial correlation 
-between degree and ratings didn't diminish after controlling for confounders. The weak statistically 
-significant positive correlation is still in place. The relation between log betweenness and rating, 
-however, changed with partial correlation and now there is no clear pattern.
+What happened when we removed the effect of the amount of ratings. Although, the mix 
+of positive and negative correlations is now more confusing, the general picture is clear - 
+**there is no linear dependency between "being at the intersection" and IMDB ratings**. 
+The coefficients are so small that there is no doubt it is due to random noise rather than 
+anything else. When coming back to the original question "are movies that merge ideas 
+from different genres/domains more successful", we can say that based on the used approaches, 
+there is no such relation.
 
 
 ## Summary
@@ -354,11 +361,14 @@ correlation and controlled for some variables for further robustness.
 What can we conclude? Three different approaches told us contradicting stories, but after 
 controlling for confounders, we can conclude that there isn't any evidence that 
 merging ideas from different genres/domains could help with the popularity or success of 
-a movie. What is more, we saw that the results highly depend on the approach we used for modelling 
-the data, which is to be expected as we went from plot descriptions into graph representations. 
-Using only one approach might give us clearer picture, but would tell only one 
-side of the story.
+a movie. The patterns we observed are likely due to random chance rather than a systematic association. 
+What is more, we saw that the results highly depend on the approach we used for modelling 
+the data, which is to be expected as we went from plot descriptions into graph representations, which is not 
+too straightforward approach.
 
+Lastly, be aware of the [p-hacking](https://en.wikipedia.org/wiki/Data_dredging) that could be applied here. 
+We could have only published one of the approaches that told the most suitable story and thanks 
+to the big enough sample size, show that the effect is statistically significant. But we didn't.
 
 ## Ethical Risks
 
