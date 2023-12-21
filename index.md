@@ -4,7 +4,7 @@ layout: default
 
 # Creative breakthroughs occur, when worlds collide
 
-*Thai-Nam Hoang, Valentin Peyron, Paul-Bogdan Jurcut, Quentin Esteban, Jan Kokla*
+*Quentin Esteban, Thai-Nam Hoang, Paul-Bogdan Jurcut, Jan Kokla, Valentin Peyron*
 
 <div class="noteBoxes note" style="display:flex;">
 	<img src="assets/light_bulb.svg" class="lightbulb" style="margin-bottom:auto;">
