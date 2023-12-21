@@ -1,9 +1,6 @@
 ---
 layout: default
 ---
-<p>
-    <img src="assets/banner.jpg" alt="Banner" class="banner">
-</p>
 
 # Creative breakthroughs occur, when worlds collide
 
@@ -167,7 +164,6 @@ depicts the rating (**lighter color → higher rating**).
         <p style="margin-bottom: 0">Feel free to drag, zoom and filter based on IMDB rating.</p>
 	</div>
 </div>
-
 
 {% include analysis/embedding_graph_simpler.html %}
 

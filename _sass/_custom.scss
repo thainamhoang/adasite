@@ -1,3 +1,7 @@
+.body {
+  overflow-x: hidden;
+}
+
 .full-width .bk-Column {
     width: calc(100vw - 10vw);
     margin-left: calc(50% - 45vw);
@@ -43,8 +47,7 @@
 .banner {
   margin: 0 auto;
   display: block;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
 }
 
 .partial-corr {
