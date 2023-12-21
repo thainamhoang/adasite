@@ -27,8 +27,8 @@ holds true in the movie industry.
 
 ## How?
 
-To do that we use the data about the movies, mainly their genres and plots. 
-Using different approaches we generate graphs that help us to quantify 
+We use the data about the movies, mainly their genres and plots to 
+generate graphs that help us to quantify 
 "being at the intersection", which will later be used in correlation analysis. 
 This is the high-level idea, let's now go to details.
 
@@ -87,16 +87,16 @@ degree, compared to the ones in the outskirts.
 Now that we have the theory settled, let's look at the data. We used 
 [CMU Movie Summary Corpus](https://www.cs.cmu.edu/~ark/personas/) 
 that contains the release year, name and plot descriptions. 
-From the histogram below, we can see that there are quite a big amount of movies. 
+From the histogram below, we can see that there is a considerable amount of movies. 
 To cope with such quantities, we decided to run the analysis on decade basis. 
-In other words all the correlation analyses below are done for 10 years: 1920-1929, 
+In other words, all the correlation analyses below are done for 10 years: 1920-1929, 
 1930-1939 etc. As visualising even 1000 nodes would be computationally heavy, all 
 the following graphs use year 2012 as an example (388 nodes).
 
 {% include analysis/year_histogram.html %}
 
 We have already talked a lot about the "success" of a movie. In this analysis we decided to 
-use IMDB rating as the proxy. We used freely accessible 
+use IMDB rating as the proxy for it. We used freely accessible 
 [IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) and merged it with the existing data. Below you see that 
 ratings are nicely distributed and mostly between 4 and 8. This is good to 
 keep in mind when performing correlation analysis - one of the arguments is 
@@ -155,9 +155,8 @@ In order to come up with threshold, let's look at the histogram of the similarit
 {% include analysis/similarity_hist.html %}
 
 The values are normally distributed and in order to keep it simple, let's set the limit for creating 
-as edge to 75% percentile. We have finally reached the goal... we have the graph. 
-For better visibility, the one below only includes the movies from 2012. As you 
-can see, we have only one big cluster with some movies on the outskirts. For the first graph, 
+as edge to 75% percentile. We have finally reached the goal... we have a graph. 
+For better visibility, the one below only includes the movies from 2012. For the first graph, 
 we use really simple approach, where the size of the node is constant and the color 
 depicts the rating (**lighter color → higher rating**).
 
@@ -190,8 +189,8 @@ approach for more robust results.
 
 As every movie has one or several genres associated with it, we can use it 
 to form a graph: **there will be an edge between the movies, if they have at least 
-one common genre**. Now it's getting interesting as we're using exactly the same movies to generate graphs, 
-but they look completely different. When in the first case, the color represented 
+one common genre**. Now it's getting interesting as we're using exactly the same movies to generate the graph, 
+but it looks completely different from the first one. When in the first case, the color represented 
 the rating, then this time we have used betweenness instead... 
 or logarithm of betweenness to be precise to get better variability of colors. 
 The size of the node now depends on the rating. As you 
@@ -213,7 +212,7 @@ we have a genre named "The Netherlands in World War II"?
 Some genres, such as 
 "Black-and-white" or "Animation," do not directly relate to the plot but rather to the 
 style or technique of the movie. The presence of subgenres like "Romantic Drama" complicates 
-the genre landscape, as they often represent a mixture of primary genres, 
+the situation, as they often represent a mixture of primary genres, 
 <u>making it difficult to maintain clear distinctions</u>. Even among the most popular genres,
 we observe unnecessary entanglement. For instance, while "Comedy" and "Drama" are distinct 
 in the emotions they evoke, genres like "Science-Fiction" or "Crime" often overlap with 
@@ -338,10 +337,10 @@ Let's use partial correlation and "control" for such variables.
 
 {% include analysis/partial_corr_table.html %}
 
-What happened when we removed the effect of the amount of ratings. Although, the mix 
-of positive and negative correlations is now more confusing, the general picture is clear - 
+What happened when we removed the effect of the amount of ratings? Although, the mix 
+of positive and negative correlations is now more confusing, the general picture became much more clear - 
 **there is no linear dependency between "being at the intersection" and IMDB ratings**. 
-The coefficients are so small that there is no doubt it is due to random noise rather than 
+The coefficients are so small that there is no doubt it is due to noise rather than 
 anything else. When coming back to the original question "are movies that merge ideas 
 from different genres/domains more successful", we can say that based on the used approaches, 
 there is no such relation.
@@ -354,7 +353,7 @@ perspectives could increase the originality and lead to better outcome.
 We applied the idea to the movie industry and hypothesised that movies with 
 different genres/ideas/motives would be more successful. To validate it, we converted 
 the raw data of the movies into graphs using different approaches for more robustness. 
-Based on graphs we could calculate the measure of "being at the intersection", which 
+Based on graphs we calculated the measure of "being at the intersection", which 
 we represented with betweenness and degree centrality. Finally, we calculated 
 correlation and controlled for some variables for further robustness.
 
@@ -364,11 +363,17 @@ merging ideas from different genres/domains could help with the popularity or su
 a movie. The patterns we observed are likely due to random chance rather than a systematic association. 
 What is more, we saw that the results highly depend on the approach we used for modelling 
 the data, which is to be expected as we went from plot descriptions into graph representations, which is not 
-too straightforward approach.
+too straightforward.
 
-Lastly, be aware of the [p-hacking](https://en.wikipedia.org/wiki/Data_dredging) that could be applied here. 
-We could have only published one of the approaches that told the most suitable story and thanks 
-to the big enough sample size, show that the effect is statistically significant. But we didn't.
+Lastly, it's important to watch out for something called publication bias and a sneaky 
+practice known as [p-hacking](https://en.wikipedia.org/wiki/Data_dredging). 
+Imagine if we had only chosen one of the graphs in the end and only told the 
+story that suits us best. It might seem tempting, especially when the sample size 
+is large enough to show a statistically significant effect. However, we resisted 
+that temptation and made sure to present all our findings, not just the ones 
+that stood out. This honesty is crucial to maintain the credibility and transparency 
+of the research, avoiding any shortcuts that might make our results seem more 
+impressive than they really are.
 
 ## Ethical Risks
 
@@ -392,7 +397,7 @@ so none of the proposed measures have been implemented yet.</p>
 Firstly, let's examine the dataset. It was created by a team at 
 Carnegie Mellon University and consists of 42,306 movie plot 
 summaries extracted from Wikipedia, along with aligned metadata 
-from Freebase. Therefore, the data were sourced from public domains. 
+from Freebase. Therefore, the data was sourced from public domains. 
 We supplemented this dataset with IMDb ratings and vote counts 
 from a public database. Data gaps were not addressed in our study.
 
@@ -425,17 +430,17 @@ the genres of movies, as our analysis includes genre information, potentially le
 results due to genre distribution imbalances.
 
 To mitigate the risk, it would be useful to ensure a balanced representation of genres. 
-This has been done by "controlling" genres in the correlation analysis.
+This has been done by "controlling" for genres in the correlation analysis.
 
 #### Sustainability 
 
 Our project requires quite a big computational load, which spends significant amount of 
 energy. It is up to discussion if the results provided by this analysis outweigh the 
-energy consumption. We can make sure that the servers provided for us run on sustainable energy.
+energy consumption. We could make sure that the servers provided for us run on sustainable energy.
 
 #### Empowerment
 
 Our analysis concluded that there is no relation between taking ideas from different genres 
 and the success of a movie. We could say that it is good news for pure genre movies 
-that aim to uphold their art. If anything it is empowering to smaller genres with 
+that aim to uphold their art. If anything it is empowering to special genres with 
 smaller budgets and audiences.
