@@ -84,7 +84,7 @@ degree, compared to the ones in the outskirts.
 Now that we have the theory settled, let's look at the data. We used 
 [CMU Movie Summary Corpus](https://www.cs.cmu.edu/~ark/personas/) 
 that contains the release year, name and plot descriptions. 
-From the histogram below, we can see that there is a considerable amount of movies. 
+The histogram below, is representing the number of movie (frequency) each year for our preprocessed data. We can see that there is a considerable amount of movies. 
 To cope with such quantities, we decided to run the analysis on decade basis. 
 In other words, all the correlation analyses below are done for 10 years: 1920-1929, 
 1930-1939 etc. As visualising even 1000 nodes would be computationally heavy, all 
@@ -94,8 +94,8 @@ the following graphs use year 2012 as an example (388 nodes).
 
 We have already talked a lot about the "success" of a movie. In this analysis we decided to 
 use IMDB rating as the proxy for it. We used freely accessible 
-[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) and merged it with the existing data. Below you see that 
-ratings are nicely distributed and mostly between 4 and 8. This is good to 
+[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) and merged it with the existing data. On the graphs Below, you see that 
+ratings are nicely distributed and mostly between 4 and 8.  This is good to 
 keep in mind when performing correlation analysis - one of the arguments is 
 almost normally distributed and if it so for the other variable, we can use parametric 
 methods.
@@ -107,8 +107,7 @@ methods.
 We have found ways for quantifying the centrality of the node, but how about movies? 
 There must be a way of representing our big corpus of data as graphs so that we could 
 calculate the metrics we discussed above and measure their correlation with IMDB ratings. 
-For that we came up with three 
-alternative approaches, which include **embeddings** and **genres**.
+For that we came up with 2 main alternative approaches, which include **embeddings** and **genres**. For the **genres** approach we used 2 different alternatives **Raw genres** and **Genres & themes**. These will be explained in the following parts  
 
 ### Embeddings
 
