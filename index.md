@@ -216,9 +216,9 @@ others such as "Drama" and "Comedy," serving more as settings or themes rather t
 {% include analysis/bar_charts.html %}
 
 To enhance the accuracy of our movie classification, we've decided to differentiate between 
-"**genres**" and "**themes**". This distinction allows us to capture both the emotional 
-tone and the narrative setting of each movie more effectively. This way we can get more nuanced 
-classification.
+"**genres**" and "**themes**". Whereas the genre reflects the type of emotions provoked by the film,
+what it wants to make us feel, the theme is more concerned with the framework in which they are set. 
+Certainly, some genres and themes are more closely linked than others, but these two aspects remain distinct.
 
 {% include analysis/genre_theme_table.html %}
 
