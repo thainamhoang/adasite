@@ -93,8 +93,8 @@ the following graphs use year 2012 as an example (388 nodes).
 {% include analysis/year_histogram.html %}
 
 We have already talked a lot about the "success" of a movie. In this analysis we decided to 
-use IMDB rating as the proxy for it. We used freely accessible 
-[IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) and merged it with the existing data. On the graphs Below, you see that 
+use [IMDB ratings](https://developer.imdb.com/non-commercial-datasets/) as the proxy for it, 
+which we merged with the existing data. On the graphs below, you see that 
 ratings are nicely distributed and mostly between 4 and 8.  This is good to 
 keep in mind when performing correlation analysis - one of the arguments is 
 almost normally distributed and if it so for the other variable, we can use parametric 
@@ -107,7 +107,8 @@ methods.
 We have found ways for quantifying the centrality of the node, but how about movies? 
 There must be a way of representing our big corpus of data as graphs so that we could 
 calculate the metrics we discussed above and measure their correlation with IMDB ratings. 
-For that we came up with 2 main alternative approaches, which include **embeddings** and **genres**. For the **genres** approach we used 2 different alternatives **Raw genres** and **Genres & themes**. These will be explained in the following parts  
+For that we came up with 2 main alternative approaches, which include **embeddings** and **genres**. 
+The **genre** approach is in turn divided into two as we used raw genres and then tried a more custom approach.
 
 ### Embeddings
 
@@ -166,7 +167,7 @@ depicts the rating (**lighter color → higher rating**).
 
 {% include analysis/embedding_graph_simpler.html %}
 
-As we have only one big cluster, then the question to ask when coming back to 
+As we have only one big cluster, then the question to ask when coming back 
 to the research problem is "whether the movies with higher degree are more successful". 
 In other words, we should see that the lighter nodes tend to be at the centre of the graph. 
 From the visual inspection it is really hard to tell if that's the case.
@@ -216,9 +217,10 @@ others such as "Drama" and "Comedy," serving more as settings or themes rather t
 {% include analysis/bar_charts.html %}
 
 To enhance the accuracy of our movie classification, we've decided to differentiate between 
-"**genres**" and "**themes**". Whereas the genre reflects the type of emotions provoked by the film,
-what it wants to make us feel, the theme is more concerned with the framework in which they are set. 
-Certainly, some genres and themes are more closely linked than others, but these two aspects remain distinct.
+"**genres**" and "**themes**". Whereas the genre reflects the type of emotions that is aims 
+to make us feel, the theme is more concerned with the framework in which they are set. 
+Certainly, some genres and themes are more closely linked than others, but these two aspects 
+remain more or less distinct.
 
 {% include analysis/genre_theme_table.html %}
 
@@ -273,7 +275,7 @@ create an edge every time similarity is higher than the threshold.
 Once again we have a different graph from the same movies. As with previous graph, 
 the color of the node is logarithm of betweenness (lighter color → higher measure) and size illustrates 
 the IMDB rating. While in previous graphs, the betweenness was either really high or almost zero, then this 
-time we have better spread due to the methodology we applied. Visually, however it is again impossible 
+time we have better spread due to the methodology we applied. Visually, however, it is again impossible 
 to say if there is any relationship between the size and color of the node. It's high time for 
 correlation analysis.
 
@@ -314,8 +316,8 @@ the viewers </u>.
 {% include analysis/scatter_tabs.html %}
 
 How about other approaches? The table below summarises the results with corresponding p-values 
-in brackets. All the other approaches, however, show the very weak **positive** correlation. 
-The coefficients are so small that it might be due to chance and the way we generated the graph.
+in brackets. All the other approaches, however, show very weak **positive** correlation. 
+Although constantly positive, the coefficients are so small that it might be due to chance and the way we generated the graph.
 
 {% include analysis/corr_table.html %}
 
@@ -370,7 +372,9 @@ that stood out. This honesty is crucial to maintain the credibility and transpar
 of the research, avoiding any shortcuts that might make our results seem more 
 impressive than they really are.
 
-## Ethical Risks
+<hr>
+
+## APPENDIX A. Ethical Risks
 
 We used [Digital Ethics Canvas](https://www.epfl.ch/education/educational-initiatives/cede/training-and-support/digital-ethics/a-visual-tool-for-assessing-ethical-risks/the-digital-ethics-canvas-how-to/)
 to assess the risks related to the project. It aims to determine if the best movies are at 
